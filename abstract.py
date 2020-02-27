@@ -30,25 +30,45 @@ class Diferença(Abstrata):
         C = A - B
         return (sorted(C))
 class Membro(Abstrata):
-    def operacoes(self,x):
-        if(x in self.A):
-            return True
-        else:
-            return False
+    def operacoes(self,x,y):
+        if y == "1":
+            if(x in self.A):
+                return True
+            else:
+                return False
+        elif y == "2":
+            if(x in self.B):
+                return True
+            else:
+                return False
 class Cria_Conj_Vazio(Abstrata):
-    def operacoes(self):
-        self.A.clear()
-        print("Conjunto vazio!")
-        return self.A
+    def operacoes(self,y):
+        if y == "1":
+            self.A.clear()
+            print("Conjunto vazio!")
+            return self.A
+        elif y == "2":
+            self.B.clear()
+            print("Conjunto vazio!")
+            return self.A
 class Insere(Abstrata):
-    def operacoes(self,x):
-        self.A.append(x)
-        print("Valor adicionado com sucesso!")
+    def operacoes(self,x,y):
+        if y =="1":
+            self.A.append(x)
+            print("Valor adicionado com sucesso!")
+        elif y == "2":
+            self.B.append(x)
+            print("Valor adicionado com sucesso!")
 class Remove(Abstrata):
-    def operacoes(self,x):
-        index = self.A.index(x)
-        self.A.pop(index)
-        print("Valor removido com sucesso!")
+    def operacoes(self,x,y):
+        if y == "1":
+            index = self.A.index(x)
+            self.A.pop(index)
+            print("Valor removido com sucesso!")
+        elif y =="2":
+            index = self.B.index(x)
+            self.B.pop(index)
+            print("Valor removido com sucesso!")
 class Atribui(Abstrata):
     def operacoes(self):
         A = set(self.A)
@@ -56,11 +76,17 @@ class Atribui(Abstrata):
         A = B
         return sorted(A)
 class Min(Abstrata):
-    def operacoes(self):
-        return min(self.A)
+    def operacoes(self,y):
+        if y == "1":
+            return min(self.A)
+        elif y == "2":
+            return min(self.B)
 class Max(Abstrata):
-    def operacoes(self):
-        return max(self.A)
+    def operacoes(self,y):
+        if y == "1":
+            return max(self.A)
+        elif y == "2":
+            return max(self.B)
 class Igual(Abstrata):
     def operacoes(self):
         A = set(self.A)
@@ -74,9 +100,6 @@ if __name__ == '__main__':
     array_result = ""
     array_result = set(array_result)
     input_user = 0
-    abs = Abstrata(0,0)
-    u = Uniao([2,3],[1,2,7])
-    print(u.operacoes())
     while(input_user != 3):
         input_user = int(input("Menu\n1)Informar valores da Array\n2)Visualizar valores\n3)Sair\n\nMenu de Operações\n4)União\n5)Interseção\n6)Diferença\n7)Membro\n8)Esvaziar conjunto\n9)Inserir\n10)Remover\n11)Atribuir\n12)Mínimo\n13)Máximo\n14)Igual\nOpção --> "))
         if(input_user == 1):
@@ -85,11 +108,11 @@ if __name__ == '__main__':
             array_two_1 = input("Digite os números para a segunda Array -> ")
             array_two = array_two_1.split(" ")
             os.system("clear")
-            
-            #Finish here
         if(input_user == 2):
             os.system("clear")
             print(f"Array 1 --> {array_one}\nArray 2 --> {array_two}")
+
+
         if(input_user == 4):
             os.system("clear")
             u = Uniao(array_one,array_two)
@@ -103,27 +126,27 @@ if __name__ == '__main__':
         if(input_user == 7):
             os.system("clear")
             user = input("Digite o número desejado --> ")
-            print("Resultado -> ",Membro(array_one,array_two).operacoes(user))
+            print("Resultado -> ",Membro(array_one,array_two).operacoes(user,input("Digite qual conjunto. 1 ou 2")))
         if(input_user == 8):    
             os.system("clear")
-            Cria_Conj_Vazio(array_one,array_two).operacoes()
+            Cria_Conj_Vazio(array_one,array_two).operacoes(input("Digite qual conjunto. 1 ou 2"))
         if(input_user == 9):
             os.system("clear")
             user_a = input("Digite o valor a ser inserido --> ")
-            Insere(array_one,array_two).operacoes(user_a)
+            Insere(array_one,array_two).operacoes(user_a,input("Digite qual conjunto. 1 ou 2"))
         if(input_user == 10):
             os.system("clear")
             user_b = input("Digite o valor a ser removido --> ")
-            Remove(array_one,array_two).operacoes(user_b)
+            Remove(array_one,array_two).operacoes(user_b,input("Digite qual conjunto. 1 ou 2"))
         if(input_user == 11):
             os.system("clear")
             print(Atribui(array_one,array_two).operacoes())
         if(input_user == 12):
             os.system("clear")
-            print(Min(array_one,array_two).operacoes())
+            print(Min(array_one,array_two).operacoes(input("Digite qual conjunto. 1 ou 2")))
         if(input_user == 13):
             os.system("clear")
-            print(Max(array_one,array_two).operacoes())
-        if(input_user == 14):.
+            print(Max(array_one,array_two).operacoes(input("Digite qual conjunto. 1 ou 2")))
+        if(input_user == 14):
             os.system("clear")
             print("Resultado --> ",Igual(array_one,array_two).operacoes())
