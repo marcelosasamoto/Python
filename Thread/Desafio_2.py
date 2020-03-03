@@ -1,6 +1,6 @@
 import threading, random, queue, time
 
-tamanho = 40
+tamanho = 50
 tabuleiro = [list() for s in range(tamanho)]                   # O vetor é compartilhado com as threads
 
 class Player:
@@ -36,8 +36,8 @@ class Player:
             #print(self.nome,"pode continuar...")
             #self.jogar_dado()
         elif self.livre == True and dados[0] != dados[1]:
-            if self.posicao+dados[0]+dados[1] >=100:
-                self.posicao = 100
+            if self.posicao+dados[0]+dados[1] >=tamanho:
+                self.posicao = tamanho
             else:
                 self.posicao = self.posicao + dados[0] + dados[1]
                 if self.posicao % 2 == 0:
@@ -68,6 +68,7 @@ def multiplay(player,mais_rapido):
             print(player.nome,"Chegou lá!")
             tempo_execucao = time.time() - start_time
             mais_rapido.put([player.nome,player.dinheiro,player.qt,tempo_execucao])
+            print("--------------------------------------------Fim da Thread", player.nome)
             break
         
 
@@ -115,5 +116,5 @@ for i in range(len(x)):
 print('\nO player mais rico é o',rico[0], "com R$", rico[1])
 print('\nA ordem para o player mais rapido foi')
 for i in range(len(x)):
-    print(i+1,"lugar foi",x[i][0],"levou %.3fsec"%x[i][3], "com R$",x[i][1],"e tem",x[i][2],"jogadas")
+    print(i+1,"lugar foi",x[i][0],"levou %.3fsec"%x[i][3], "com R$%.2f"%x[i][1],"e teve",x[i][2],"jogadas")
 
