@@ -26,7 +26,7 @@ class Tela:
             self.labeltext.configure(text=str("Tempo:%i"%self.time))
         self.runing = False
         tk.Label(self.windows,text="FINALIZANDO THREADS",height=45).pack()
-        time.sleep(0.2)
+        time.sleep(1)
         window.quit()
 
     def contbutton(self):
